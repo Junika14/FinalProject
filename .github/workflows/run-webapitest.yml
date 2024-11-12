@@ -26,13 +26,8 @@ jobs:
       uses: browser-actions/setup-chrome@v1.7.2
       
     # install dependencies
-    - name: Cache Gradle dependencies
-      uses: actions/cache@v3
-      with:
-          path: ~/.gradle/caches
-          key: gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            gradle-
+    - name: Grant execute permission for gradlew
+      run: chmod +x ./gradlew
 
     # execute gradle task
     - name: Run cucumber API Test
