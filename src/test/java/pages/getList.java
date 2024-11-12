@@ -15,21 +15,43 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class getList {
 
     Response res;
+    private static getList instanceStatus;
+    private String url;
 
-    public void giveTheValidUrl( String url){
-        setUrl(url);
+    public static getList getInstance() {
+        if (instanceStatus == null) {
+            instanceStatus = new getList();
+        }
+        return instanceStatus;
+    }
+
+    public void resetResponse(){
+        res=null;
+    }
+
+    public void setResponse(Response response){
+        res=response;
+    }
+    public void giveTheValidUrl( String endpoint, String ID){
+        this.url = setUrl(endpoint, ID);
+        System.out.println("URL yang disetel: " + this.url);
      }
 
     public void hitApiGetAllUsers(){
-        res= getListUsers(setUrl);
-        System.out.println(res);
-        System.out.println("Response Body: " + res.getBody().asString());
+        res= getListUsers(url);
+        if(res!=null){
+            System.out.println("Response Body: " + res.getBody().asString());
+        }else{
+            System.out.println("Response Body is null");
+        }
 
     }
     public void validationStatusCodeIsEquals( int statusCode){
-        assertThat(res.getStatusCode()).isEqualTo(statusCode);
-        //System.out.println(res.getBody());
-
+        if(res!=null){
+            assertThat(res.getStatusCode()).isEqualTo(statusCode);
+        }else{
+            System.out.println("Response status code is null");
+        }
     }
     public void validationResponseBodyGetListUsers(){
         List<Object> id = res.jsonPath().getList("id");

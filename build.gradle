@@ -24,8 +24,29 @@ dependencies {
 
     testImplementation 'org.seleniumhq.selenium:selenium-java:4.21.0'
     testImplementation 'io.github.bonigarcia:webdrivermanager:5.9.0'
+    testImplementation 'io.cucumber:cucumber-html:0.2.7'
 }
 
 test {
     useJUnitPlatform()
+    systemProperty 'cucumber.junit-platform.naming-strategy', 'long'
+    //systemProperty 'cucumber.plugin', 'json:build/reports/cucumber-report.json, html:build/reports/cucumber-report.html'
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+task cucumberApiTest(type: Test){
+    useJUnitPlatform()
+    systemProperty 'cucumber.filter.tags', '@api'
+    systemProperty 'cucumber.plugin', 'json:build/reports/cucumber/api-cucumber-report.json, html:build/reports/cucumber/api-cucumber-report.html'
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+}
+
+task cucumberWebTest(type: Test) {
+    useJUnitPlatform()
+    systemProperty 'cucumber.filter.tags', '@web'
+    systemProperty 'cucumber.plugin', 'json:build/reports/cucumber/web-cucumber-report.json, html:build/reports/cucumber/web-cucumber-report.html'
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
 }

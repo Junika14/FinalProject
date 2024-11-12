@@ -3,27 +3,28 @@ package stepDef;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import pages.createUser;
+import pages.DeleteUserPage;
+import pages.UpdateUserPage;
+import pages.createUserPage;
 import pages.getList;
 
 public class GetListApi {
 
 
-    getList getList;
-    createUser  createUser;
-    public GetListApi() {
-        getList = new getList();
-        createUser = new createUser();
-    }
+     private final getList getList = pages.getList.getInstance();
+     private final createUserPage  createUserPage = pages.createUserPage.getInstance();
+     private final DeleteUserPage  deleteUserPage = pages.DeleteUserPage.getInstance();
+
+
 
     @Given("give the valid url {string}")
     public void giveTheValidUrl(String url) {
         switch (url) {
             case "GET_USERS":
-                getList.giveTheValidUrl(url);
+                getList.giveTheValidUrl(url, null);
                 break;
             case "CREATE_USER":
-                createUser.theValidUrl(url);
+                createUserPage.theValidUrl(url, null);
                 break;
             default:
                 System.out.println("Invalid URL");
@@ -39,11 +40,12 @@ public class GetListApi {
     @Then("validation status code is equals {int}")
     public void validationStatusCodeIsEquals(int status_code) {
         switch (status_code) {
-            case 200:
-                getList.validationStatusCodeIsEquals(status_code);
-                break;
             case 201:
-                createUser.statusCode(status_code);
+                createUserPage.statusCode(status_code);
+                break;
+            case 200:
+            case 204:
+                getList.validationStatusCodeIsEquals(status_code);
                 break;
             default:
                 System.out.println("Invalid status code");

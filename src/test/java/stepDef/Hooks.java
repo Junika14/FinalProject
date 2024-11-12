@@ -1,9 +1,7 @@
 package stepDef;
 
-import io.cucumber.java.After;
-import io.cucumber.java.AfterAll;
-import io.cucumber.java.Before;
-import io.cucumber.java.BeforeAll;
+import io.cucumber.java.*;
+import pages.getList;
 
 import static helper.Utility.quitDriver;
 import static helper.Utility.startDriver;
@@ -11,22 +9,19 @@ import static helper.Utility.startDriver;
 
 public class Hooks {
 
-    @BeforeAll
-    public static void beforeAll() {
-
-    }
-    @AfterAll
-    public static void afterAll() {
-
-    }
-
-   @Before
-   public void before() {
-        startDriver();
+   @Before(order = 1)
+   public void setUpBefore(Scenario scenario) {
+       if(scenario.getSourceTagNames().contains("@web")){
+           startDriver();
+       }
+       getList.getInstance().resetResponse();
    }
-    @After
-    public void afterTest() {
-        quitDriver();
+
+    @After(order = 1)
+    public void afterTest(Scenario scenario) {
+       if(scenario.getSourceTagNames().contains("@web")){
+           quitDriver();
+       }
     }
 
 }

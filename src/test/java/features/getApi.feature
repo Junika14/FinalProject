@@ -1,4 +1,4 @@
-Feature: Get List
+Feature: API List
 
   @api
   Scenario: get list all users
@@ -15,10 +15,33 @@ Feature: Get List
     """
     {
     "name": "abadam",
-    "email": "abadam@example.com",
+    "email": "{email}",
     "gender": "male",
     "status": "active",
     }
     """
-  When send a post request
-  Then validation status code is equals 201
+    When send a post request
+    Then  validation status code is equals 201
+
+  @api
+  Scenario: update user information with valid data
+    Given give the valid url "UPDATE_USER" with id user "7518233"
+    And input the body request update :
+      """
+    {
+    "name": "Abadam",
+    "email": "{email}",
+    "gender": "male",
+    "status": "inactive",
+    }
+    """
+    When send put request
+    Then  validation status code is equals 200
+
+    @api
+    Scenario: Delete data user
+      Given give the valid url "DELETE_USER" with valid "7518237"
+      When send delete request
+      Then  validation status code is equals 204
+      And validate that user is deleted
+
