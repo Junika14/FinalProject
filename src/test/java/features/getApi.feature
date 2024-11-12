@@ -40,7 +40,7 @@ Feature: API List
 
     @api
     Scenario: Delete data user
-      Given give the valid url "DELETE_USER" with valid "7518237"
+      Given give the valid url "DELETE_USER" with valid "7518650"
       When send delete request
       Then  validation status code is equals 204
       And validate that user is deleted
