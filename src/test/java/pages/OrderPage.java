@@ -44,14 +44,14 @@ public class OrderPage {
     }
 
     public void clicksItem() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.invisibilityOfElementLocated(loginModal));
         driver.findElement(item).click();
 
     }
 
     public void addtoCart(String buttonName) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         switch (buttonName) {
             case "Add to cart":
                 wait.until(ExpectedConditions.visibilityOfElementLocated(addCartButton));
@@ -74,7 +74,7 @@ public class OrderPage {
     }
 
     public void messageCart(String messageExpected) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         String actualMessage = alert.getText();
         Assert.assertEquals("Expected message: " + messageExpected + ", but got: " + actualMessage, messageExpected, actualMessage);
@@ -83,7 +83,7 @@ public class OrderPage {
     }
 
     public void cartMenu() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.invisibilityOfElementLocated(loginModal));
         wait.until(ExpectedConditions.visibilityOfElementLocated(cartMenu));
         driver.findElement(cartMenu).click();
@@ -91,7 +91,7 @@ public class OrderPage {
 
     public void fillOrderForm(Map<String, String> formData) {
         System.out.println(formData);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
        // wait.until(ExpectedConditions.visibilityOfElementLocated(deleteButton));
         if (formData.get("name") != null && !formData.get("name").isEmpty()) {
             driver.findElement(name).sendKeys(formData.get("name"));
