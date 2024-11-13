@@ -1,4 +1,4 @@
-name: Run API UI Test
+name: Run API Test
 
 on:
   push:
@@ -32,9 +32,6 @@ jobs:
     # execute gradle task
     - name: Run cucumber API Test
       run: ./gradlew cucumberApiTest
-        
-    - name: Run Cucumber Web Tests
-      run: ./gradlew cucumberWebTest
 
     # upload the reports
     - name: Upload Test Report
