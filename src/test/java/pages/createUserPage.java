@@ -18,6 +18,7 @@ public class createUserPage {
     private RequestSpecification request;
     private Boolean requestSent=false;
     private String url;
+    //private String userId;
 
 
     private createUserPage() {}
@@ -44,7 +45,7 @@ public class createUserPage {
 
     }
 
-    public void sendPostRequest() {
+    public Response sendPostRequest() {
         if(request != null){
             this.response = request.post(url);
             System.out.println(this.response.asString());
@@ -53,6 +54,7 @@ public class createUserPage {
         }else{
             System.out.println("Request is null");
         }
+        return response;
 
     }
     public void statusCode(int statusCode) {
@@ -65,6 +67,10 @@ public class createUserPage {
             System.out.println("actual status code: " + response);
             System.out.println(response.asString());
             assertThat(actualStatusCode).isEqualTo(statusCode);
-
     }
+
+    public String saveUserId(){
+        return response.jsonPath().getString("id");
+    }
+
 }

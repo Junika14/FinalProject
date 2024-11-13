@@ -38,10 +38,23 @@ Feature: API List
     When send put request
     Then  validation status code is equals 200
 
-    @api
-    Scenario: Delete data user
-      Given give the valid url "DELETE_USER" with valid "7518237"
-      When send delete request
-      Then  validation status code is equals 204
-      And validate that user is deleted
+  @api
+  Scenario: Delete data user
+    Given give the valid url "CREATE_USER"
+    And input the body request :
+    """
+    {
+    "name": "abadam",
+    "email": "{email}",
+    "gender": "male",
+    "status": "active",
+    }
+    """
+    When send a post request
+    Then  validation status code is equals 201
+    And save the "ID_CREATED" of the newly created user
+    Given give the valid url "DELETE_USER" with valid "ID_CREATED"
+    When send delete request
+    Then  validation status code is equals 204
+    And validate that user is deleted
 

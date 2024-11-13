@@ -14,6 +14,7 @@ public class CreateUser {
 
    private final createUserPage createUserPage = pages.createUserPage.getInstance();
     Response res;
+    private String userId;
 
 
     @And("input the body request :")
@@ -39,5 +40,9 @@ public class CreateUser {
         return createUserPage;
     }
 
-
+    @And("save the {string} of the newly created user")
+    public void saveTheOfTheNewlyCreatedUser(String arg0) {
+        userId = createUserPage.saveUserId();
+        System.out.println(userId);
+    }
 }

@@ -5,18 +5,20 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import pages.DeleteUserPage;
+import pages.createUserPage;
 import pages.getList;
 
 public class DeleteUser {
 
     private final DeleteUserPage deleteUserPage= DeleteUserPage.getInstance();
     private final getList listInstance = getList.getInstance();
-    private String userId;
+    String userId = createUserPage.getInstance().saveUserId();
     private String urlId;
+
 
     @Given("give the valid url {string} with valid {string}")
     public void giveTheValidUrlWithValid(String endpoint, String ID) {
-        userId = ID;
+        // userId = ID;
         urlId = endpoint;
         deleteUserPage.urlDeleteUser(endpoint,userId);
         System.out.println("URL dan ID yang disetel untuk DELETE: " + urlId + " dengan ID: " + userId);
