@@ -15,6 +15,8 @@ dependencies {
     implementation group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.11.2'
     testImplementation 'io.cucumber:cucumber-java:7.10.1'
     testImplementation 'io.cucumber:cucumber-junit:7.10.1'
+    testImplementation 'io.cucumber:cucumber-core:7.10.1'
+
 
     testImplementation 'io.rest-assured:rest-assured:5.3.0'
     testImplementation 'io.rest-assured:json-schema-validator:5.4.0'
@@ -29,24 +31,33 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    systemProperty 'cucumber.junit-platform.naming-strategy', 'long'
-    //systemProperty 'cucumber.plugin', 'json:build/reports/cucumber-report.json, html:build/reports/cucumber-report.html'
-    testLogging {
-        events "passed", "skipped", "failed"
+}
+
+sourceSets {
+    test {
+        resources {
+            srcDirs 'src/test/java/features'
+        }
     }
 }
-task cucumberApiTest(type: Test){
+task cucumberApiTest(type: Test) {
     useJUnitPlatform()
-    systemProperty 'cucumber.filter.tags', '@api'
     systemProperty 'cucumber.plugin', 'json:build/reports/cucumber/api-cucumber-report.json, html:build/reports/cucumber/api-cucumber-report.html'
+    systemProperty 'cucumber.filter.tags', '@api'
     testClassesDirs = sourceSets.test.output.classesDirs
     classpath = sourceSets.test.runtimeClasspath
+    testLogging {
+        events "PASSED", "FAILED", "SKIPPED"
+        showStandardStreams = true
+    }
 }
+
 
 task cucumberWebTest(type: Test) {
     useJUnitPlatform()
     systemProperty 'cucumber.filter.tags', '@web'
     systemProperty 'cucumber.plugin', 'json:build/reports/cucumber/web-cucumber-report.json, html:build/reports/cucumber/web-cucumber-report.html'
+    systemProperty 'cucumber.options', '--glue src/test/java/stepDef src/test/java/features'
     testClassesDirs = sourceSets.test.output.classesDirs
     classpath = sourceSets.test.runtimeClasspath
 }
