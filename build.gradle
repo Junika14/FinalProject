@@ -57,7 +57,6 @@ task cucumberWebTest(type: Test) {
     useJUnitPlatform()
     systemProperty 'cucumber.filter.tags', '@web'
     systemProperty 'cucumber.plugin', 'json:build/reports/cucumber/web-cucumber-report.json, html:build/reports/cucumber/web-cucumber-report.html'
-    systemProperty 'cucumber.options', '--glue src/test/java/stepDef src/test/java/features'
     testClassesDirs = sourceSets.test.output.classesDirs
     classpath = sourceSets.test.runtimeClasspath
 }
