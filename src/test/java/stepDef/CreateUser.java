@@ -21,7 +21,7 @@ public class CreateUser {
     public void inputTheBodyRequest(String bodyRequest) {
         String dynamicEmail = "user_"+ UUID.randomUUID().toString().substring(0,8) + "@xyuu.com";
         bodyRequest = bodyRequest.replace("{email}", dynamicEmail);
-        System.out.println("Dynamic Email: " + dynamicEmail);
+        //System.out.println("Dynamic Email: " + dynamicEmail);
         createUserPage.inputTheBodyRequest(bodyRequest);
     }
 
@@ -43,6 +43,6 @@ public class CreateUser {
     @And("save the {string} of the newly created user")
     public void saveTheOfTheNewlyCreatedUser(String arg0) {
         userId = createUserPage.saveUserId();
-        System.out.println(userId);
+        //System.out.println(userId);
     }
 }

@@ -21,14 +21,14 @@ public class DeleteUser {
         // userId = ID;
         urlId = endpoint;
         deleteUserPage.urlDeleteUser(endpoint,userId);
-        System.out.println("URL dan ID yang disetel untuk DELETE: " + urlId + " dengan ID: " + userId);
+        //System.out.println("URL dan ID yang disetel untuk DELETE: " + urlId + " dengan ID: " + userId);
     }
     @When("send delete request")
     public void sendDeleteRequest() {
         deleteUserPage.sendDeleteRequest();
         Response response = deleteUserPage.getResponse();
         listInstance.setResponse(response);
-        System.out.println("Response setelah delete: " + (response != null ? response.getStatusCode() : "null"));
+        //System.out.println("Response setelah delete: " + (response != null ? response.getStatusCode() : "null"));
 
     }
 
@@ -37,7 +37,7 @@ public class DeleteUser {
         Response getUserResponse = deleteUserPage.sendGetUserRequest(userId); // Coba ambil kembali user
         listInstance.setResponse(getUserResponse);
         listInstance.validationStatusCodeIsEquals(404);
-        System.out.println("Response setelah validasi: " + (getUserResponse != null ? getUserResponse.getStatusCode() : "null"));
+        //System.out.println("Response setelah validasi: " + (getUserResponse != null ? getUserResponse.getStatusCode() : "null"));
     }
 
 

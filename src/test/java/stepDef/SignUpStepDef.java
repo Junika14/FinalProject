@@ -25,7 +25,7 @@ public class SignUpStepDef {
     @And("the user click {string} menu")
     public void theUserClickMenu(String nameButton) {
         signUpPage.userClickMenu(nameButton);
-        System.out.println(nameButton);
+        //System.out.println(nameButton);
     }
 
     @And("the user input username dynamic")
