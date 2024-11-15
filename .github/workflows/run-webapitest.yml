@@ -31,7 +31,7 @@ jobs:
 
     # execute gradle task
     - name: Run cucumber API Test
-      run: ./gradlew cucumberApiTest
+      run: ./gradlew apiTest
 
     # upload the reports
     - name: Upload Test Report
