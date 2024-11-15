@@ -42,15 +42,15 @@ configurations {
     }
 }
 
-tasks.register('cucumber') {
-    description("Running Cucumber Test")
+tasks.register('apiTest') {
+    description("Running API Test")
     dependsOn assemble, compileTestJava
     doLast {
         javaexec {
-            main = "io.cucumber.core.cli.Main"
+            mainClass.set("io.cucumber.core.cli.Main")
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = [
-                    '--plugin', 'build/reports/cucumber/api-cucumber-report.html',
+                    '--plugin', 'html:build/reports/cucumber/api-cucumber-report.html',
                     '--plugin', 'json:build/reports/cucumber/api-cucumber-report.json',
                     '--plugin', 'pretty',
                     '--glue', 'stepDef',
@@ -62,10 +62,21 @@ tasks.register('cucumber') {
 }
 
 
-task cucumberWebTest(type: Test) {
-    useJUnitPlatform()
-    systemProperty 'cucumber.filter.tags', '@web'
-    systemProperty 'cucumber.plugin', 'json:build/reports/cucumber/web-cucumber-report.json, html:build/reports/cucumber/web-cucumber-report.html'
-    testClassesDirs = sourceSets.test.output.classesDirs
-    classpath = sourceSets.test.runtimeClasspath
+tasks.register('webTest'){
+    description("Running Web Test")
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            mainClass.set("io.cucumber.core.cli.Main")
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '--plugin', 'html:build/reports/cucumber/web-cucumber-report.html',
+                    '--plugin', 'json:build/reports/cucumber/web-cucumber-report.json',
+                    '--plugin', 'pretty',
+                    '--glue', 'stepDef',
+                    '--tags', "@web",
+                    'src/test/resources/features'
+            ]
+        }
+    }
 }
