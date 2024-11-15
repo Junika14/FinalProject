@@ -31,7 +31,7 @@ jobs:
 
     # execute gradle task      
     - name: Run Cucumber Web Tests
-      run: ./gradlew cucumberWebTest
+      run: ./gradlew webTest
 
     # upload the reports
     - name: Upload Test Report
