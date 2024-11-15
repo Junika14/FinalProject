@@ -39,11 +39,11 @@ public class getList {
 
     public void hitApiGetAllUsers(){
         res= getListUsers(url);
-        if(res!=null){
-            System.out.println("Response Body: " + res.getBody().asString());
-        }else{
-            System.out.println("Response Body is null");
-        }
+//        if(res!=null){
+//            System.out.println("Response Body: " + res.getBody().asString());
+//        }else{
+//            System.out.println("Response Body is null");
+//        }
 
     }
     public void validationStatusCodeIsEquals( int statusCode){
