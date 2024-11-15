@@ -1,6 +1,6 @@
-@api
-Feature: API List
 
+Feature: API List
+@api
   Scenario: get list all users
     Given give the valid url "GET_USERS"
     And hit api get all users
@@ -8,7 +8,7 @@ Feature: API List
     Then validation response body get list users
     Then validation response json with JSONSchema "get_all_user.json"
 
-
+@api
   Scenario: create user with input valid data
     Given give the valid url "CREATE_USER"
     And input the body request :
@@ -23,7 +23,7 @@ Feature: API List
     When send a post request
     Then  validation status code is equals 201
 
-
+@api
   Scenario: update user information with valid data
     Given give the valid url "UPDATE_USER" with id user "7518233"
     And input the body request update :
@@ -38,6 +38,7 @@ Feature: API List
     When send put request
     Then  validation status code is equals 200
 
+@api
   Scenario: Delete data user
     Given give the valid url "CREATE_USER"
     And input the body request :

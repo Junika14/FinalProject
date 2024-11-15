@@ -10,11 +10,14 @@ repositories {
 }
 
 dependencies {
+    //junit
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     implementation group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.11.2'
+
+
     testImplementation 'io.cucumber:cucumber-java:7.10.1'
-    testImplementation 'io.cucumber:cucumber-junit:7.10.1'
+    testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.10.1'
     testImplementation 'io.cucumber:cucumber-core:7.10.1'
 
 
@@ -33,22 +36,28 @@ test {
     useJUnitPlatform()
 }
 
-sourceSets {
-    test {
-        resources {
-            srcDirs 'src/test/java/features'
-        }
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
     }
 }
-task cucumberApiTest(type: Test) {
-    useJUnitPlatform()
-    systemProperty 'cucumber.plugin', 'json:build/reports/cucumber/api-cucumber-report.json, html:build/reports/cucumber/api-cucumber-report.html'
-    systemProperty 'cucumber.filter.tags', '@api'
-    testClassesDirs = sourceSets.test.output.classesDirs
-    classpath = sourceSets.test.runtimeClasspath
-    testLogging {
-        events "PASSED", "FAILED", "SKIPPED"
-        showStandardStreams = true
+
+tasks.register('cucumber') {
+    description("Running Cucumber Test")
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '--plugin', 'build/reports/cucumber/api-cucumber-report.html',
+                    '--plugin', 'json:build/reports/cucumber/api-cucumber-report.json',
+                    '--plugin', 'pretty',
+                    '--glue', 'stepDef',
+                    '--tags', "@api",
+                    'src/test/resources/features'
+            ]
+        }
     }
 }
 
