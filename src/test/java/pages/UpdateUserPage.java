@@ -26,7 +26,7 @@ public class UpdateUserPage {
     }
     public void urlUpdateUser(String endpoint, String ID){
         this.url = EndpointList.setUrl(endpoint,ID);
-        System.out.println("URL SET" + this.url);
+        //System.out.println("URL SET" + this.url);
     }
     public void setTheRequestBodyUpdate(String body){
         request = setupHeaders();

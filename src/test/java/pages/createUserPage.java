@@ -48,8 +48,8 @@ public class createUserPage {
     public Response sendPostRequest() {
         if(request != null){
             this.response = request.post(url);
-            System.out.println(this.response.asString());
-            System.out.println(this.response.getStatusCode());
+            //System.out.println(this.response.asString());
+            //System.out.println(this.response.getStatusCode());
             requestSent=true;
         }else{
             System.out.println("Request is null");
@@ -63,9 +63,9 @@ public class createUserPage {
             sendPostRequest();
         }
             int actualStatusCode = response.getStatusCode();
-            System.out.println("expected status code: " + statusCode );
-            System.out.println("actual status code: " + response);
-            System.out.println(response.asString());
+           // System.out.println("expected status code: " + statusCode );
+            //System.out.println("actual status code: " + response);
+            //System.out.println(response.asString());
             assertThat(actualStatusCode).isEqualTo(statusCode);
     }
 

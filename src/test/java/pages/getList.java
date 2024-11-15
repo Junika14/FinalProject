@@ -34,7 +34,7 @@ public class getList {
     }
     public void giveTheValidUrl( String endpoint, String ID){
         this.url = setUrl(endpoint, ID);
-        System.out.println("URL yang disetel: " + this.url);
+        //System.out.println("URL yang disetel: " + this.url);
      }
 
     public void hitApiGetAllUsers(){

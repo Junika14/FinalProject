@@ -27,7 +27,7 @@ public class OrderPage {
     private By month = org.openqa.selenium.By.id("month");
     private By year = org.openqa.selenium.By.id("year");
     private By purchaseButton = org.openqa.selenium.By.xpath("//button[text()='Purchase']");
-    private By deleteButton = org.openqa.selenium.By.xpath("//button[text()='Delete']");
+    //private By deleteButton = org.openqa.selenium.By.xpath("//button[text()='Delete']");
     private By messageSuccess = org.openqa.selenium.By.xpath("//h2[text()='Thank you for your purchase!']");
 
 
@@ -79,7 +79,7 @@ public class OrderPage {
         String actualMessage = alert.getText();
         Assert.assertEquals("Expected message: " + messageExpected + ", but got: " + actualMessage, messageExpected, actualMessage);
         alert.accept();
-        System.out.println(actualMessage);
+        //System.out.println(actualMessage);
     }
 
     public void cartMenu() {

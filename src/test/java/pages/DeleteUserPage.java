@@ -23,7 +23,7 @@ public class DeleteUserPage {
 
     public void urlDeleteUser(String endpoint, String ID){
         this.url = setUrl(endpoint, ID);
-        System.out.println("URL yang disetel: " + this.url);
+        //System.out.println("URL yang disetel: " + this.url);
     }
 
     public void sendDeleteRequest(){
@@ -34,8 +34,8 @@ public class DeleteUserPage {
         }
         if(url != null && !url.isEmpty()){
             response = request.delete(url);
-            System.out.println("DELETE request sent to:" + url);
-            System.out.println("Delete Status Code: " + response.getStatusCode());
+            //System.out.println("DELETE request sent to:" + url);
+            //System.out.println("Delete Status Code: " + response.getStatusCode());
         }else{
             System.out.println("Delete request url is empty");
         }
@@ -59,10 +59,10 @@ public class DeleteUserPage {
         }
         String url = setUrl("GET_USERS_BYID", ID);
         if (url != null && !url.isEmpty()) {
-            System.out.println("GET REQUEST URL ID:" + url);
+            //System.out.println("GET REQUEST URL ID:" + url);
             Response getUserResponse = request.get(url);
-            System.out.println("GET Response Status Code: " + getUserResponse.getStatusCode());
-            System.out.println("GET Response Body: " + getUserResponse.getBody().asString());
+            //System.out.println("GET Response Status Code: " + getUserResponse.getStatusCode());
+            //System.out.println("GET Response Body: " + getUserResponse.getBody().asString());
             return getUserResponse;
         } else {
             System.out.println("GET request is empty");

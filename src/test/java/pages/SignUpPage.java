@@ -30,14 +30,14 @@ public class SignUpPage {
 
     public void openMainPage(){
         driver.findElement(ontheMainPage);
-        System.out.println("Main page opened");
+        //System.out.println("Main page opened");
     }
 
     public void userClickMenu(String nameButton){
         switch (nameButton){
             case "Sign Up":
                 driver.findElement(signUpMenu).click();
-                System.out.println("Clicked on Sign up menu");
+                //System.out.println("Clicked on Sign up menu");
                 break;
             case "Login":
                 driver.findElement(loginMenu).click();
@@ -49,11 +49,11 @@ public class SignUpPage {
     }
     public void enterUserName(String userName){
         driver.findElement(inputUsername).sendKeys(userName);
-        System.out.println(userName);
+        //System.out.println(userName);
     }
     public void enterPassword(String password){
         driver.findElement(inputPassword).sendKeys(password);
-        System.out.println(password);
+        //System.out.println(password);
     }
     public void clickOnSignIn(String buttonType){
         switch (buttonType) {
@@ -73,7 +73,7 @@ public class SignUpPage {
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         String actualMessage = alert.getText();
         Assert.assertEquals("Expected message: " + messageExpected + ", but got: " + actualMessage, messageExpected, actualMessage);
-        System.out.println(actualMessage);
+        //System.out.println(actualMessage);
     }
     public void loginUser(String username, String password){
         driver.findElement(usernameLogin).sendKeys(username);
