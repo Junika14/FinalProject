@@ -25,7 +25,7 @@ Feature: API List
 
 @api
   Scenario: update user information with valid data
-    Given give the valid url "UPDATE_USER" with id user "7518233"
+    Given give the valid url "UPDATE_USER" with id user "7533324"
     And input the body request update :
       """
     {
